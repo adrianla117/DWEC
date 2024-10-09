@@ -86,7 +86,7 @@ let carnaca = "chorizo";
 console.log(carnaca);
 //let carnaca = "chuleta"; //Uncaught SyntaxError: redeclaration of let carnaca
 //console.log(carnaca);
-//const: se usa cuando queremos declararun elementos que no cambia su valor o tipo/referente
+//const: se usa cuando queremos declarar un elemento que no cambia su valor o tipo/referente
 const PI = 3.141516;
 console.log(PI);
 //const PI=4;
