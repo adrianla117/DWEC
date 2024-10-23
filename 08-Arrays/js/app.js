@@ -65,3 +65,89 @@ for (let i = 0; i<frutas.length; i++){
 for (let indice in frutas){
     console.log(frutas[indice]);
 }
+
+//const frutas = ["Naranja", , "Limón", , "Melón"];
+//for.. of(sí que imprime los undefined)
+for (let valor of frutas){
+    if (valor !== undefined){
+        console.log(valor);
+    }
+}
+//Con el in accedo a la posición(índice) con el of accedo al propio valor
+
+/*La referencia al array no cambia por eso se declara const pero el contenido sí puede cambiar*/
+const mismasFrutas = frutas; /*Esto no es una copia, es una asignación*/
+mismasFrutas[1] = "Pera";
+console.log(frutas);
+
+//PROPIEDADES array.length
+console.log(frutas.length);
+
+//MÉTODOS
+//Añadir elementos a un array (podemos añadir al final o al inicio): array.push(), array.unshift()
+frutas.push("Kaki"); //final
+frutas.unshift("Pomelo");//inicio
+console.log(frutas);
+
+//Borrar elementos delete(array[indice]) deja huecos!!
+delete(frutas[3]);
+console.log(frutas);
+
+//Extraer elementos
+//array.pop() extraer del final. No deja hueco!!
+//array.shift() para extraer del inicio. No deja hueco!!
+let frutasFinal = frutas.pop();
+console.log(frutasFinal);
+console.log(frutas);
+let frutasInicio = frutas.shift();
+console.log(frutasInicio);
+console.log(frutas);
+
+//array.slice(ini, fin): extrae parte de un array. El fin no está incluido. No modifica el array original, por lo que hay que crear una variable
+let extraido = frutas.slice(0,2);
+console.log(extraido);
+
+//array.splice(ini, cantidad, elemento, elemento): Los elementos son opcionales, puedes añadir o no elementos.
+frutas.splice(2,2,"Pomelo","Kaki","Kiwi");
+console.log(frutas);
+
+//MÉTODO para transformar array a cadena
+//array.toString() separada por comas
+//array.join("separador") separada por un separador
+console.log(frutas.toString());
+console.log(frutas.join("-"));
+
+let cadenaFrutas = "";
+for(let i in frutas){
+    cadenaFrutas += frutas[i]+" ";
+}
+console.log(cadenaFrutas);
+
+//MÉTODOS para buscar elementos de los arrays
+//indexOf(elemento): devuelve el primer índice donde se encuentra el elemento, -1 no encuentra
+//lastIndexOf(elemento): devuelve el último índice donde se encuentra el elemento, -1 no encuentra
+//includes() true/false si encuentra el elemento
+console.log(frutas.indexOf("Pera"));
+console.log(frutas.indexOf("sdfdsf"));
+console.log(frutas.includes("Pera")); //true
+
+const numeros = [1, 4, 1, 5, 6, 1];
+console.log(numeros.lastIndexOf(1));
+
+/*filter, map, some, every, find... métodos de arrays pero que usan una función*/
+
+//concat, reverse, toReversed, sort
+const diasTrabajo = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+const diasRelax = ["Sábado", "Domingo"];
+
+//array.concat(array2): une arrays
+const diasSemana = diasTrabajo.concat(diasRelax);
+console.log(diasSemana);
+
+//array.reverse(): invierte el array. Cambia el array original, es destructivo
+const diasSemanaInvertido = diasSemana.reverse();
+console.log(diasSemanaInvertido);
+
+//array.sort(): ordena el valor dependiendo del valor Unicode de cada elemento
+diasSemana.sort();
+console.log(diasSemana);
