@@ -151,3 +151,75 @@ console.log(diasSemanaInvertido);
 //array.sort(): ordena el valor dependiendo del valor Unicode de cada elemento
 diasSemana.sort();
 console.log(diasSemana);
+
+//Desesctructuración de Arrays
+const bebidas = ["Agua", "Café", "Vino", ,"Cerveza"];
+let [b1, b2, b3, b4, b5] = bebidas;
+/*let b1 = bebidas[0];*/
+console.log(b1);
+console.log(b2);
+console.log(b3);
+console.log(b4);
+console.log(b5);
+
+let [be1, be2, be3, ,be5] = bebidas;
+console.log(be1);
+console.log(be2);
+console.log(be3);
+console.log(be5);
+
+//OPERADOR DE EXPANSIÓN, PROPAGACIÓN spread (...)
+const bebidas2 = bebidas; /*esto no es hacer una copia del array*/
+bebidas2[3] = "Nestea"; /*este cambio sucede en bebidas2 y bebidas*/
+console.log(bebidas);
+console.log(bebidas2);
+
+const bebidas3 = [...bebidas]; /*esto sí es una copia*/
+console.log(bebidas3);
+bebidas3[3] = "Fanta";
+console.log(bebidas3);
+console.log(bebidas);
+
+let [beb1, beb2, ...otrasBebidas] = bebidas;
+console.log(otrasBebidas);
+
+//VISUALIZA UN ARRAY
+//for.. in /*no imprime undefined y accede a los índices, no accede al valor*/
+for (let i in bebidas){
+    console.log(bebidas[i]);
+}
+
+//for.. of /*imprimer undefined y accede al valor*/
+for (let valor of bebidas){
+    console.log(valor);
+}
+
+//Métodos values(), keys(), entries()
+//array.values() accede a los valores del array y devuelve un array con todos los valores
+//array.keys() accede a las claves de los array y devuelve un array con todas las claves (índices)
+//array.entries() accede al par (clave, valor) y devuelve un array con todos los pares clave valor
+console.table(bebidas);
+const bebidasValores = bebidas.values();
+console.log([...bebidasValores]);
+
+for (let valor of bebidas.values()){
+    console.log(valor);
+}
+
+for (let claves of bebidas.keys()){
+    console.log(claves);
+}
+
+for (let [clave, valor] of bebidas.entries()){
+    console.log(`La clave es ${clave} y el valor es ${valor}`);
+}
+
+const listaNumeros = [2, 69, 99, 1, 0];
+//el número mayor de este array
+var mayorNum = 0;
+for (let [clave, valor] of listaNumeros.entries()){
+    if (valor > listaNumeros[clave+1]){
+        mayorNum = valor;
+    }
+}
+console.log(`el valor es ${mayorNum}`) //ESTÁ MAL :(
