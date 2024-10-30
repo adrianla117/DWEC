@@ -44,3 +44,52 @@ console.log(conjunto.delete("hola"));
 console.log(conjunto);
 //has: Retorna un booleano indicando si un elemento con un valor específico existe en el set o no
 console.log(conjunto.has("adiós"));
+
+
+const ropa = new Set(["pantalón", "camisa", "Camisa", "pijama"]);
+const motos = new Set();
+motos.add("Yamaha");
+motos.add("Honda");
+motos.add("Honda"); //no se añade
+
+//MÉTODOS Y PROPIEDADES de los Set
+//size
+console.log(ropa.size);
+
+//add
+motos.add("Honda");
+
+//delete
+ropa.delete("Camisa");
+
+//has
+console.log(ropa.has("camisa")); //true
+console.log(ropa.has("dadasdsdsf")); //false
+
+//clear ---> Elimina todos los elementos.
+motos.clear();
+console.log(motos);
+
+//PARA VISUALIZAR: a parte de los for..of. No for..in
+for (let valor of ropa){ //en cada iteracion se va a guardar el valor de cada momento del conjunto
+    console.log(valor);
+}
+
+const conjunto4 = new Set("pantalon");
+console.log(conjunto4);
+
+//values() ----> Imprime el conjunto de valores.
+for (let valor of ropa.values()){
+    console.log(valor);
+}
+
+//keys() ----> Da los valores duplicados
+for (let clave of ropa.keys()){
+    console.log(clave);
+}
+
+//entries()
+for (let [clave, valor] of ropa.entries()){
+    console.log(`La clave es ${clave} y el valor es ${valor}`);
+} //da duplicado porque no tiene índices
+
