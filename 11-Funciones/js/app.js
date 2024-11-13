@@ -85,3 +85,155 @@ console.log(doble(4)); //llamada a la función con la variable
 //se utilizan para funciones sencillas, con poco código
 //no tienen propiedad hoisting
 const doble2 = x => 2*x;
+
+//MÉTODO FOREACH
+/*Permite iterar sobre elementos de array, set, map
+No devuelve un nuevo array, no modifica el array original
+No puedo parar el ciclo de iteración con break, continue.
+No devuelve return
+
+Sintaxis:
+
+array.forEach(function(elemento,indice,array){
+    //instrucciones;
+});
+
+El elemento es en el que está iterando en cada iteración.
+indice y array son opcionales.
+*/
+
+const desayunos = ["yogurt", "petisuis", "rollo canela"];
+desayunos.forEach(function(elemento){
+    console.log(elemento);
+});
+
+//arrow function
+desayunos.forEach(d => console.log(d));
+
+
+
+//forEach en conjuntos set
+const conjunto = new Set(["hola", "adios", "bye"]);
+conjunto.forEach(function(saludo){
+        console.log(saludo);
+});
+
+//lo mismo pero con arrow function
+conjunto.forEach(s => console.log(s));
+
+
+
+//forEach en map
+const mapa = new Map([
+    [1, "hola"],
+    [2, "adios"],
+    [3, "bye"]
+]);
+
+mapa.forEach(function(elemento, indice){
+    console.log(`Índice: ${indice} Elemento: ${elemento}`);
+});
+
+//lo mismo pero con arrow function
+mapa.forEach((e, i) => console.log(`Índice: ${i} Elemento: ${e}`));
+
+
+
+//Crear array con edades de alumnos, con foreach realizamos el conteo de los mayores de edad
+const edades = [20, 14, 16, 25, 55];
+
+function mayoresEdad(array){
+    let num = 0;
+
+    array.forEach(function(e){
+        if(e>=18){
+            num++;
+        }
+    });
+
+    return num;
+}
+
+console.log(mayoresEdad(edades));
+
+//Con arrow function:
+function mayoresEdad(array){
+    let num = 0;
+
+    array.forEach(edad => {
+        if(edad>=18){
+            num++;
+        }
+    });
+
+    return num;
+}
+
+console.log(mayoresEdad(edades));
+
+
+
+//Crear array con notas y relizáis la media
+const notas = [8, 10, 5, 3, 6];
+
+function mediaNotas(array){
+    let nota = 0;
+    let num = 0;
+    let media = 0;
+
+    array.forEach(function(e){
+        nota = e + nota;
+        num++;
+    });
+
+    return media = nota/num;
+}
+
+console.log(mediaNotas(notas));
+
+//Con arrow function:
+function mediaNotas(array){
+    let nota = 0;
+    let num = 0;
+    let media = 0;
+
+    array.forEach(notillas => {
+        nota = notillas + nota;
+        num++;
+    });
+
+    return media = nota/num;
+}
+
+console.log(mediaNotas(notas));
+
+
+//MAP
+/*
+Itera sobre los elementos del array
+Devuelve un nuevo array
+No modifica el original
+No podemos parar el ciclo de iteración
+
+Sintaxis:
+const nuevoArray = array.map(function(elemento, indice, array){
+    //instrucciones;
+});
+
+//el indice y el array son opcionales
+*/
+
+//Consigue un nuevo array con los elementos pares
+const numeros2 = [1,2,3,4,5,6,7];
+
+const arrayPares = numeros2.map(function(pares, i){
+    if(pares%2!==0){
+        numeros2.splice(i,1);
+    }
+});
+
+console.log(numeros2);
+
+
+//Consigue nuevo array con las palabras de más de 4 letras
+const palabras = ["luna", "sol", "cielo", "estrellas"];
