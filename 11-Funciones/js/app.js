@@ -237,3 +237,63 @@ console.log(numeros2);
 
 //Consigue nuevo array con las palabras de más de 4 letras
 const palabras = ["luna", "sol", "cielo", "estrellas"];
+
+
+ const numeros = [2, 3, 4, 1];
+ const dobles = numeros.map(num => num*2);
+ console.log(dobles);
+
+ const palabras2 = ["mesa", "silla", "ordenador", "tomcat9"];
+ const lonPalabras2 = palabras2.map(palabra=>palabra.length);
+ console.log(lonPalabras2);
+
+
+ /*FILTER
+ Recorre todos los elementos de un array les aplica una función y si cumplen la condición aplicada el array se filtra.
+ Puede devolver un array de igual longitud o de menor longitud que el original
+ Si ningún elemento cumple la condición devuelve un array vacío
+
+ const nuevoArray = array.filter(function(elemento, indice, array){
+    //instrucciones
+ })
+
+ */
+
+ //pares
+const pares = numeros.filter(function(num){
+    return (num % 2 === 0); //así solo devuelve los pares
+})
+console.log(pares);
+
+//Con arrow function sería:
+//const pares = numeros.filter(num => num % 2 === 0);
+//console.log(pares);
+
+
+ //palabras de más de 6 letras
+ const palabrasLargas = palabras2.filter(function(palabra){
+    return (palabra.length>6);
+ })
+console.log(palabrasLargas);
+
+//Con arrow function sería:
+//const palabrasLargas = palabras2.filter(palabra => palabra.length>6);
+//console.log(palabrasLargas);
+
+
+/*función tradicional a la que se le pase un array y una letra y devuelva un array
+con las palabras que incluyan la letra indicada*/
+const letra = "a";
+const arrayPalabras = ["mesa", "libro", "casa", "hamaca", "hija"];
+
+function palabrasConLetra(array, letra){
+    array.filter(function(palabra){
+        return palabra.toLowerCase().includes(letra.toLoweCase());
+    })
+}
+
+//Con arrow function sería:
+//function palabrasConLetra(array,letra){
+//const arrayFiltrado = array.filter(palabras=>palabra.toLoweCase().includes(letra.toLoweCase()));
+//}
+//console.log(palabrasConletra);
