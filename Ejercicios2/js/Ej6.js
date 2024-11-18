@@ -7,7 +7,6 @@ function frasesPalindromo() {
         }
 
         texto = texto.toLowerCase();
-
         const textoLimpio = limpiarTexto(texto);
 
         let esPalindromo = true;
