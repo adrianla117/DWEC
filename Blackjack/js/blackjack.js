@@ -36,6 +36,7 @@ function calcularPuntos(mano){
 const cartasJ = document.getElementById("cartasJugador");
 const cartasC = document.getElementById("cartasCrupier");
 const mensajeResultado = document.getElementById("mensaje");
+mensajeResultado.style.color = "red"; //para cambiar el color del mensaje a rojo
 const botonHit = document.getElementById("hit");
 const botonStand = document.getElementById("stand");
 
