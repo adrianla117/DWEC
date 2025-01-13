@@ -134,3 +134,108 @@ const coche3 = {
         estos extras: ${this.extras[0]}, ${this.extras[1]}`;
     }
 }
+
+
+const fruta = {
+    nombre: "Pera",
+    tipo: "Conferencia",
+    precio:2.95,
+    descuento: true,
+    info: function(){
+        return `la fruta ${this.nombre} de tipo ${this.tipo} tiene un precio de ${this.precio}`;
+    },
+    precioDescuento: function(){
+        if(this.descuento=true){
+            return this.precio - 0.5;
+        }
+    },
+    actualizarPrecio: function(nuevoprecio){
+        this.precio = nuevoprecio;
+    }
+}
+
+
+console.table(fruta);
+//añadir propiedades a un objeto
+fruta.color = "Verde";
+
+//añadir métodos a un objeto
+//nombreObjeto.nombreMétodo = function(){ //instrucciones }
+//Añade un método que compare dos frutas y devuelva una cadena indicando cuál es la fruta que menos vale
+
+fruta.compararPrecio = function(nuevaFruta){
+    if(this.precio>nuevaFruta.precio){
+        return `La fruta más barata es ${nuevaFruta.nombre}`;
+    }else if(this.precio<nuevaFruta.precio){
+        return `La fruta más barata es ${this.nombre}`;
+    }else{
+        return `La fruta ${this.nombre} tiene el mismo precio que la fruta ${nuevaFruta.nombre}`;
+    }
+};
+
+//llamadas a los métodos
+console.log(fruta.info());
+console.log(`El precio con descuento es: ${fruta.precioDescuento()}`); //tiene que ser con paréntesis, si no sale la información del método entera
+
+const fruta2 = {
+    nombre: "Manzana",
+    tipo: "Golden",
+    precio:2.20,
+    descuento: true,
+    info: function(){
+        return `la fruta ${this.nombre} de tipo ${this.tipo} tiene un precio de ${this.precio}`;
+    },
+    precioDescuento: function(){
+        if(this.descuento=true){
+            return this.precio - 0.5;
+        }
+    },
+    actualizarPrecio: function(nuevoprecio){
+        this.precio = nuevoprecio;
+    }
+}
+
+console.log(fruta.compararPrecio(fruta2));
+//console.log(fruta2.compararPrecio(fruta)); error porque el método pertenece al objeto fruta, no al objeto fruta2
+
+//eliminar propiedad o métodos
+//delete nombreObjeto.nombrePropiedad
+//delete nombreObjeto.nombreMétodo
+
+//VISUALIZAR un objeto
+console.log(fruta.nombre);
+
+//for..in   for..of -> no funciona, el objeto no es iterable directamente
+
+for(let i in fruta){
+    if(typeof fruta[i]!=='function'){
+        console.log(fruta[i]); //NO es fruta.i
+    }
+}
+
+//Métodos: Object.values(), Object.keys(), Object.entries()
+//Cada uno de ellos devuelve un array, con los valores del objetos, con las claves del objeto,
+//y con los pares clave-valor del objeto
+
+for(let i in Object.values(fruta)){
+    console.log(fruta[i]);
+}
+
+//const array_valores = Object.values(fruta);
+//console.log(array_valores);
+for (let valor of Object.entries(fruta)){
+    if(typeof valor !== 'function'){
+        console.log(valor);
+    }
+}
+
+for (let [clave, valor] of Object.entries(fruta)){
+    if(typeof valor !== 'function'){
+        console.log(`La clave es ${clave} y el valor es ${valor}`);
+    }
+}
+
+//Convertir un objeto a cadena en formato JSON para por ejemplo guardar en un archivo o almacenamiento local
+//localStorage, sessionStorage
+const cadenaObjeto = JSON.stringify(fruta);
+console.log(cadenaObjeto);
