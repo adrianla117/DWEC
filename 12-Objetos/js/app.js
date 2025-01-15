@@ -239,3 +239,126 @@ for (let [clave, valor] of Object.entries(fruta)){
 //localStorage, sessionStorage
 const cadenaObjeto = JSON.stringify(fruta);
 console.log(cadenaObjeto);
+
+
+//Función constructora de Objetos
+function Persona(nom, ap1, ap2, fnac, ocu, ojos = "Marrones"){ //"1990-01-01"
+    //Propiedades
+    this.nombre = nom;
+    this.apellido1 = ap1;
+    this.apellido2 = ap2;
+    this.fnacimiento = new Date(fnac);
+    this.ocupacion = ocu;
+    //propiedades con valor por defecto
+    //this.ojos = "Marrones";
+    this.ojos = ojos;
+
+    //Métodos
+    this.nombreCompleto = function(){
+        return `Mi nombre es ${this.nombre} ${this.apellido1} ${this.apellido2}`;
+    };
+
+    this.cambiarOcupacion = function(nuevaOcupacion){
+        return this.ocupacion = nuevaOcupacion;
+    };
+
+    this.obtenerEdad = function(){
+        const anhoActual = new Date().getFullYear();
+        return anhoActual - this.fnacimiento.getFullYear();
+    };
+
+    this.infoCompleta = function(){
+        return `${this.nombreCompleto()} y trabajo de ${this.ocupacion} y tengo ${this.obtenerEdad} años`;
+    };
+}
+
+//Instanciar objetos Persona
+const miPadre = new Persona("Pepe", "López", "Martínez", "1977-01-01", "Banquero", "Verdes");
+const miMadre = new Persona("María", "Pérez", "Martínez", "1977-02-02", "Docente");
+const miHermano = new Persona("Javier", "López", "Pérez", "1999-03-03", "Estudiante");
+
+//Visualizamos el objeto
+
+for(let v of Object.values(miPadre)){
+    if(typeof v !== 'function'){
+        console.log(v);
+    }
+}
+
+for(let v of Object.values(miMadre)){
+    if(typeof v !== 'function'){
+        console.log(v);
+    }
+}
+
+//Cambiar propiedades en los objetos instanciados
+miMadre.ojos = "Verdes";
+console.log(miMadre.ojos);
+
+//Añadir propiedad adicional a los objetos instanciados
+//no va en el constructor!!! solo está en el objeto al que se la añadimos
+miMadre.altura = 1.70;
+console.log(miMadre.altura);
+console.log(miPadre.altura); //undefined no existe la propiedad
+
+//Cómo añado propiedades o métodos en el constructor
+//Persona.altura = 1.70; no
+Persona.prototype.altura = 1.70;
+
+Persona.prototype.infoOcupacion = function(){
+    return `Trabajo de ${this.ocupacion}`;
+};
+const yo = new Persona("Lucía", "Pérez", "Pérez", "1990-01-01", "Tendera");
+console.log(yo);
+
+
+//Métodos asociados a los objetos
+//Object.create(); //Este método crea un nuevo objeto con el prototipo especificado por proto.
+//Es útil para establecer relaciones de herencia entre objetos.
+const proto = { greet: function() { console.log('Hello'); } };
+const obj1 = Object.create(proto);
+obj1.greet(); // "Hello"
+
+
+//Object.assign(); //Copia las propiedades de uno o más objetos fuente (sources) a un objeto destino (target) y devuelve el objeto destino.
+//Se puede lograr algo similar usando el operador de propagación (...). //se podría hacer lo mismo con el operador de propagación
+const target = { a: 1 };
+const source = { b: 2 };
+Object.assign(target, source); // { a: 1, b: 2 }
+
+const miHermano2 = new Persona();
+Object.assign(miHermano2, miHermano);
+console.log(miHermano2);
+
+
+Object.freeze(); //Congela un objeto, es decir, evita que se le puedan agregar, modificar o eliminar propiedades.
+//El objeto se vuelve inmutable.
+const obj2 = { a: 1 };
+Object.freeze(obj2);
+obj2.a = 2; // No tiene efecto
+delete obj2.a; // No tiene efecto
+
+
+Object.seal(); //Sella un objeto, lo que significa que no se pueden agregar o eliminar propiedades, pero sí se pueden modificar las propiedades existentes.
+const obj3 = { a: 1 };
+Object.seal(obj3);
+obj3.a = 2; // Modificación permitida
+delete obj3.a; // No tiene efecto
+
+
+Object.isSealed(); Object.isFrozen(); //Verifica si un objeto está sellado o congelado.
+//Devuelve true si está sellado, de lo contrario, false.
+const obj4 = { a: 1 };
+Object.seal(obj4);
+console.log(Object.isSealed(obj4)); // true
+
+const obj5 = Object.freeze({ a: 1 });
+console.log(Object.isFrozen(obj5)); // true
+
+
+Object.hasOwnProperty(); //Verifica si el objeto tiene una propiedad como propia (es decir, no heredada). Se puede lograr algo similar con el operador in,
+//pero este último también verifica las propiedades heredadas. //se puede hacer con in
+const obj6 = { a: 1 };
+console.log(obj6.hasOwnProperty('a')); // true
+console.log('a' in obj6); // true
+
