@@ -1,5 +1,15 @@
+//para comprobar en vez de darValor podemos utilizar una funcion fuera del constructor como esta:
+/*function comprobarParametros(palo,valor){
+    return (palo>=1 && palo<=4 && valor>=1 && valor<=10); //retorna un valor true o false
+}*/
+
 
 function Carta(palo, valor){
+    //comprobación:
+    if(!comprobarParametros(palo,valor)){
+        return null;
+    }
+
     this.palo = palo;
     this.valor = valor;
 
@@ -28,6 +38,12 @@ function Carta(palo, valor){
             default:
                 return "desconocido";
         }
+
+        //con array:
+        /*this.paloToString = function(){
+            const palos = ["","Oros","Espadas","Bastos","Copas"]; //el 0 ("") lo dejo vacío porque no hay un valor equivalente a 0 en el ejercicio
+            return palos[this.palo];
+        }*/
     };
 
     this.paloToString = function(){
@@ -43,6 +59,12 @@ function Carta(palo, valor){
             default:
                 return "desconocido";
         }
+
+        //con array:
+        /*this.valorToString = function(){
+            const valores = ["","As","Dos","Tres","Cuatro","Cinco","Seis","Siete","Sota","Caballo","Rey"]; //el 0 ("") lo dejo vacío porque no hay un valor equivalente a 0 en el ejercicio
+            return valores[this.valor];
+        }*/
     };
 
     this.toString = function(){
@@ -58,7 +80,27 @@ function Carta(palo, valor){
             this.palo = nuevoPalo;
         }
     };
+
+    //llamamos la función de fuera:
+    /*this.darValor = function(nuevoValor, nuevoPalo){
+        if(comprobarParametros(nuevoPalo,nuevoValor)){
+            this.palo = nuevoPalo;
+            this.valor = nuevoValor;
+        }
+    }*/
 }
+
+//pruebas:
+const cartaErronea = new Carta(-1,0);
+console.log(cartaErronea);
+
+const asOros = new Carta(1,1);
+console.log(asOros);
+console.log(asOros.paloToString());
+console.log(asOros.valorToString());
+console.log(asOros.toString());
+as.Oros.darValor(2,2);
+console.log(asOros.toString());
 
 function Baraja(){
     this.cartas = [];
@@ -87,3 +129,25 @@ function Baraja(){
         }
     }
 }
+
+
+//function Baraja() también podría ser así:
+/*function crearBaraja(){
+    const cartas = [];
+    //se puede rellenar aquí la baraja
+    for (let p=1; p<=4; p++){
+        for (let v=1; v<=10; v++){
+            this.cartas.push(new cartas(p,v));
+        }
+    }
+    return cartas;
+}*/
+
+
+
+/*function Baraja(){
+    this.cartas = crearBaraja();
+   
+    //copia de un array
+    const nuevoArray = [...this.cartas];
+}*/
