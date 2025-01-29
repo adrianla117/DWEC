@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM-Eventos</title>
+</head>
+<body>
+    <h1 id="encabezado" onclick="colorear(this.id)">CLICKA PARA CAMBIAR EL ESTILO!!</h1>
+    <!--También vale con:
+    document.getElementById('encabezado').style.color='red'
+    this.style.color='red'
+    colorear()-->
+    <h2 id="subtitulo" onclick="colorear(this.id)">SUBTÍTULO</h2>
+    <!--Con this.id e id en la función del .js conseguimos que se coloreen por separado,
+    es decir cuando clickamos en cada una por separado se vuelven a rojo-->
+    <p id="p1" onmouseover="cambiarEstilo(this.id)" onmouseout="cambiarOriginal(this.id)">Este párrafo cambia de color al pasar el ratón</p>
+    <button id="btn1" onclick="mostrarFecha()">Mostrar fecha</button>
+    <p id="p2"></p>
+    <p id="p3">Haz click para recibir un saludo!!!</p> <!--No hace falta poner el onclick aquí-->
+    <script src="js/app.js"></script>
+</body>
+</html>
