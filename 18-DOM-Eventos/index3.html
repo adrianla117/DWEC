@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener, removeEventListener</title>
+</head>
+<body>
+    <h1 id="encabezado">Saludar</h1>
+    <button id="btn1">Borrar eventos</button>
+    <p id="eventos">Información de los eventos</p>
+    <p id="p1">Desde párrafo 1</p>
+    <p id="p2">Desde párrafo 2</p>
+    <p id="p3">Te saludo con tu nombre</p>
+    <script>
+        /*
+            addEventListener("click", funcion)
+                función anónima, arrow function
+                el nombre de una función sin paréntesis
+        */
+       const encabezado = document.getElementById("encabezado");
+       encabezado.addEventListener("click", saludo);
+       encabezado.addEventListener("click", saludo2);
+       encabezado.addEventListener("click", cambiaColor);
+       function saludo(){
+        alert("Hola");
+       }
+       function saludo2(){
+        alert("Qué tal?");
+       }
+       function cambiaColor(){
+        encabezado.style.color = "red";
+       }
+       /*encabezado.addEventListener("click", function(){
+            alert("Hola");
+       });*/
+
+       //removeEventListener("click", funcion) solo se puede usar con funciones específicas
+       document.getElementById("btn1").addEventListener("click", borrarEventos);
+       let colorOriginal = encabezado.style.color;
+       function borrarEventos(){
+            encabezado.removeEventListener("click", saludo);
+            encabezado.removeEventListener("click", saludo2);
+            encabezado.removeEventListener("click", cambiaColor);
+            encabezado.style.color = colorOriginal;
+        }
+
+        //Información de los eventos
+        const eventos = document.getElementById("eventos");
+        eventos.addEventListener("mouseover", cambiaEstilo);
+        eventos.addEventListener("mouseout", cambiaEstilo);
+        function cambiaEstilo(e){ //el parámetro de aquí es el evento que se ha lanzado (podemos acceder a su información)
+            //e.type se accede al evento lanzado
+            //e.target se accede al elemento que tiene el evento
+            if(e.type === "mouseover"){
+                eventos.style.color = "red";
+                //this.style.color = "red" también valdría así
+            }else if(e.type === "mouseout"){
+                eventos.style.color = "initial";
+            }
+        }
+
+        document.getElementById("p1").addEventListener("click", mensaje);
+        document.getElementById("p2").addEventListener("click", mensaje);
+        function mensaje(p){
+            if(p.target.id === "p1"){
+                alert(`Hola ${this.innerHTML}`);
+            }else if(p.target.id === "p2"){
+                alert(`Hola ${this.innerHTML}`);
+            }
+        }
+
+        //Cómo pasar parámetros en addEventListener
+        document.getElementById("p3").addEventListener("click", function(){
+            let nombre = prompt("Introduce tu nombre");
+            saludoNombre(nombre); //llamada a la función con parámetro!!!!
+        });
+        function saludoNombre(){
+            alert(`Hola ${nombre}`);
+        }
+
+        /*NAVEGAR POR EL DOM*/
+        /*
+        Propiedades de los nodos:
+            nodeName: H1, P, DIV...
+            nodeType: es un número 1 nodo elemento, 2 nodo atributo, 3 nodo texto
+            nodeValue: nodo elemento valor null, nodo texto contenido de texto
+        */
+       console.log(encabezado.nodeName);//H1
+       console.log(encabezado.nodeValue);//null
+       console.log(encabezado.nodeType);//1
+       console.log(encabezado.firstChild.nodeName);//#text, va a ser texto, no etiqueta
+       console.log(encabezado.firstChild.nodeValue);//SALUDAR
+       console.log(encabezado.firstChild.nodeType);//3
+
+       /*
+        RELACIONES
+            parentNode:
+            firstChild / firstElementChild:
+            lastChild / lastElementChild:
+            nextSibling / nextElementSibling:
+            previousSibling / previousElementSibling
+            Children / ChildNodes
+       */
+      console.log(encabezado.parentNode);
+      console.log(encabezado.lastChild);
+      console.log(encabezado.nextSibling);
+    </script>
+</body>
+</html>
