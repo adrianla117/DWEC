@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="padre">
+        <div class="hijo">
+            <p class="nieto1">Nieto 1</p>
+            <p class="nieto2">Nieto 2</p>
+            <p class="nieto3">Nieto 3</p>
+        </div>
+    </div>
+
+    <ul class="lista">
+        <li class="item1"></li>
+        <li class="item2"></li>
+    </ul>
+
+    <h1>LISTA DE TAREAS</h1>
+    <input type="text" id="input">
+    <button id="btn1">Añadir</button>
+    <ul id="lista"></ul>
+    <script>
+    /*
+        NAVEGAR POR EL DOM
+        parentNode / parentElementNode
+        firstChild /firstElementChild
+        ...
+        children / childNodes
+    */
+
+    const hijo = document.querySelectorAll("div.hijo")[0];
+    console.log(hijo.parentElement);
+    console.log(hijo.firstElementChild); //nieto 1
+    console.log(hijo.firstChild); //#text
+    console.log(hijo.lastChild); //#text
+    console.log(hijo.lastElementChild); //nieto 3
+    console.log(hijo.firstElementChild.nextElementSibling); //nieto 2
+    console.log(hijo.children[1]); //nieto 2
+    
+
+    /*
+    AÑADIR Y ELIMINAR CONTENIDO HTML
+        
+        Pasos: 
+            Crear el elemento, document.createElement("li");
+            Crear el nodo de texto, document.createTextNode("Texto que quieres");
+            Añado el hijo nodo texto al elemento, padre.appendChild("hijo");
+
+    */
+
+    const li3 = document.createElement("li"); //crea un nuevo elemento <li>, pero aún no está en el DOM.
+    const textoli3 = document.createTextNode("Item 3"); //crea un nodo de texto que contiene "Item 3", pero también aún no está en el DOM.
+    li3.appendChild(textoli3); //añade el nodo de texto como hijo del <li>, es decir, <li>Item 3</li>.
+
+    //Para que el nuevo <li> aparezca en la página, aún habría que añadirlo a un elemento padre existente,
+    //por ejemplo: document.querySelector("ul").appendChild(li3); //Esto lo insertaría dentro de una lista <ul> en la página.
+
+
+    /*
+        elemento.setAttribute("class, "item3")
+    */
+   li3.setAttribute("class", "item3") //asigna la clase "item3" al elemento <li> (li3).
+    //Esto es equivalente a hacer li3.className = "item3";, pero setAttribute permite modificar cualquier atributo, no solo la clase.
+
+    const lista1 = document.getElementById("lista");
+    lista1.appendChild(li3) //agrega el elemento <li> (li3) al final de lista1, agregandole el class="item3" tambien al li
+    console.log(lista1.children[2]); //mostramos el tercer elemento de la lista (item 3)
+
+
+    /*TAREAS*/
+
+    //referencias a elementos
+    const input = document.getElementById("input");
+    const btn1 = document.getElementById("btn1");
+    const lista = document.getElementById("lista");
+
+    //addEventListener
+    btn1.addEventListener("click", añadirTarea);
+
+    //funciones
+    function añadirTarea(){
+        let valor = input.value.trim();
+        if(!valor){
+            alert("Inserta alguna tarea");
+        }else{
+            crearElemento("li",valor,lista);
+        }
+    }
+
+    function crearElemento(elemento, texto, padre){
+        const ele = document.createElement(elemento);
+        const text = document.createTextNode(texto);
+        ele.appendChild(text);
+        //ele.textContent = text; Podríamos omitir lo de arriba y hacerlo así
+
+        //document.createElement(elemento).textContent = texto;  También podría ser así
+        padre.appendChild(ele);
+    }
+    </script>
+
+</body>
+</html>
