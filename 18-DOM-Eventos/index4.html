@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .eliminar{
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .separar{
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="padre">
@@ -88,6 +99,7 @@
             alert("Inserta alguna tarea");
         }else{
             crearElemento("li",valor,lista);
+            input.value = "";
         }
     }
 
@@ -96,6 +108,22 @@
         const text = document.createTextNode(texto);
         ele.appendChild(text);
         //ele.textContent = text; Podríamos omitir lo de arriba y hacerlo así
+
+        const btnEliminar = document.createElement("span");
+        btnEliminar.textContent = "X";
+
+        //como hemos visto antes, hay dos formas de añadir un atributo:
+        //setAttribute("class","eliminar");
+        //btnEliminar.setAttribute("class","eliminar");
+        //btnEliminar.setAttribute("class","separar");
+        //es mejor de esta forma:
+        btnEliminar.classList.add("eliminar"); //con classList accedo a las clases que tiene un elemento
+        btnEliminar.classList.add("separar");
+        
+        ele.appendChild(btnEliminar);
+        btnEliminar.addEventListener("click", function(){
+            padre.removeChild(ele);
+        })
 
         //document.createElement(elemento).textContent = texto;  También podría ser así
         padre.appendChild(ele);
